@@ -65,7 +65,7 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-function playGame(maxRounds) {
+function playGame(maxRounds=5) {
     console.log(`Let's play Rock, Paper, Scissors, best of ${maxRounds}!`);
 
     for (i = 0; i < maxRounds; i++) {
@@ -89,4 +89,4 @@ function playGame(maxRounds) {
 // Declare default scores for both players and play a best of 5
 let playerScore = 0;
 let computerScore = 0;
-playGame(5);
+playGame();
