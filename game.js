@@ -24,10 +24,6 @@ function getPlayerChoice() {
     }
 }
 
-// Declare default scores for 
-let playerScore = 0;
-let computerScore = 0;
-
 // Play a single round of rock, paper, scissors
 function playRound(playerChoice, computerChoice) {
     console.log(`Computer chose ${computerChoice}!`);
@@ -68,3 +64,29 @@ function playRound(playerChoice, computerChoice) {
             break;
     }
 }
+
+function playGame(maxRounds) {
+    console.log(`Let's play Rock, Paper, Scissors, best of ${maxRounds}!`);
+
+    for (i = 0; i < maxRounds; i++) {
+        const playerSelection = getPlayerChoice();
+        const computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        console.log(`Score: ${playerScore}:${computerScore}`)
+    }
+
+    if (playerScore > computerScore) {
+        console.log('You win! Thanks for playing!');
+    }
+    if (playerScore === computerScore) {
+        console.log('You tied! Thanks for playing!');
+    } 
+    if (playerScore < computerScore) {
+        console.log('You lost... Thanks for playing!');
+    }
+}
+
+// Declare default scores for both players and play a best of 5
+let playerScore = 0;
+let computerScore = 0;
+playGame(5);
