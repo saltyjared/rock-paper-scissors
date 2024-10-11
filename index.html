@@ -9,14 +9,43 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
         
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         h1 {
             text-align: center;
-            padding: 375px 0;
+        }
+
+        #prompt {
+            text-align: center;
+        }
+
+        #choices {
+            display: flex;
+            justify-content: center;
+        }
+
+        #choices > button {
+            font-size: 64px;
+            padding: 48px 120px;
+            margin: 48px;
         }
     </style>
-    <script src="game.js"></script>
+    <script src="game.js" defer></script>
 </head>
 <body>
-    <h1>Hey, there's nothing here. Open Dev Tools and head to the "Console" tab to play!</h1>
+    <h1>Rock Paper Scissors</h1>
+
+    <div id="prompt"></div>
+    
+    <div id="choices">
+        <button id="rock">✊</button>
+        <button id="paper">🖐️</button>
+        <button id="scissors">✊</button>
+    </div>
 </body>
 </html>

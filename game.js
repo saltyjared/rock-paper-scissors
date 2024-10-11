@@ -12,60 +12,73 @@ function getComputerChoice() {
 }
 
 // Get player's choice via input prompt
-function getPlayerChoice() {
+/*function getPlayerChoice() {
     const input = prompt("Rock, paper, or scissors?").toLowerCase();
     if (weapon.includes(input)) {
-        console.log(`You chose ${input}!`);
+        (`You chose ${input}!`);
         return input;
     } 
     else {
         console.log('Error! Invalid choice!');
         getPlayerChoice();
     }
-}
+}*/
+
+// Initialize scores for each player
+let playerScore = 0;
+let computerScore = 0;
+
+// Initalize prompt to later modify as game progresses
+const prompt = document.querySelector('#prompt');
+const promptText = document.createElement('h2');
+promptText.setAttribute('style', 'white-space: pre;');
+promptText.textContent = "Let's play Rock Paper Scissors!\r\nSelect a weapon below!\r\n";
+prompt.appendChild(promptText);
+
+// Add event listeners to RPS buttons
+const choices = document.querySelectorAll('#choices > button');
+choices.forEach((choice) => {
+    choice.addEventListener('click', () => {
+        playRound(choice.id, getComputerChoice());
+    })
+});
 
 // Play a single round of rock, paper, scissors
 function playRound(playerChoice, computerChoice) {
-    console.log(`Computer chose ${computerChoice}!`);
+    promptText.textContent = `You chose ${playerChoice}\r\n`
+    promptText.textContent += `Computer chose ${computerChoice}!\r\n`;
     let state = playerChoice + '|' + computerChoice;
     switch(state) {
         case 'rock|rock':
-            console.log('You tie! Both players chose rock.');
-            break;
-        case 'rock|paper':
-            console.log('You lose! Paper beats rock.');
-            computerScore++;
+        case 'paper|paper':
+        case 'scissors|scissors':    
+            promptText.textContent += 'You tie!';
             break;
         case 'rock|scissors':
-            console.log('You win! Rock beats scissors.');
-            playerScore++;
-            break;
         case 'paper|rock':
-            console.log('You win! Paper beats rock.');
-            playerScore++;
-            break;
-        case 'paper|paper':
-            console.log('You tie! Both players chose paper.');
-            break;
-        case 'paper|scissors':
-            console.log('You lose! Scissors beats paper.');
-            computerScore++;
-            break;
-        case 'scissors|rock':
-            console.log('You lose! Rock beats scissors.');
-            computerScore++;
-            break;
         case 'scissors|paper':
-            console.log('You win! Scissors beats paper.');
+            promptText.textContent +='You win!';
             playerScore++;
             break;
-        case 'scissors|scissors':
-            console.log('You tie! Both players chose scissors.');
+        default:
+            promptText.textContent +='You lose!';
+            computerScore++;
             break;
+    }
+    promptText.textContent += `\r\nScore: ${playerScore} - ${computerScore}\r\n`
+
+    if (playerScore == 5) {
+        promptText.textContent = `Score: ${playerScore} - ${computerScore}\r\nYou win!`
+        playerScore = 0;
+        computerScore = 0;
+    } else if (computerScore == 5) {
+        promptText.textContent = `Score: ${playerScore} - ${computerScore}\r\nYou lose...`
+        playerScore = 0;
+        computerScore = 0;
     }
 }
 
-function playGame(maxRounds=5) {
+/* function playGame(maxRounds=5) {
     console.log(`Let's play Rock, Paper, Scissors, best of ${maxRounds}!`);
 
     for (i = 0; i < maxRounds; i++) {
@@ -84,9 +97,4 @@ function playGame(maxRounds=5) {
     if (playerScore < computerScore) {
         console.log('You lost... Thanks for playing!');
     }
-}
-
-// Declare default scores for both players and play a best of 5
-let playerScore = 0;
-let computerScore = 0;
-playGame();
+} */
